@@ -8,9 +8,12 @@
   <body>
     <main>
       <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
+      activeLinkPath, cartCount: cartCount }); %>
       <h1 class="heading"><%= product.name %></h1>
       <div><%= product.description %></div>
+      <% if (product.price) { %>
+      <div>Price: <%= product.price %></div>
+      <% } %>
       <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
     </main>
     <script>
@@ -20,13 +23,13 @@
         }
 
         fetch(`/products/${name}`, {
-          method: "DELETE",
+          method: 'DELETE',
         }).then((response) => {
           console.log(response);
           if (response.ok) {
             window.location.reload();
           } else {
-            alert("Error while removing product.");
+            alert('Error while removing product.');
           }
         });
       }

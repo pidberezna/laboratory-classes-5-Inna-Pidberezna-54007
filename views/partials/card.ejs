@@ -1,0 +1,11 @@
+<div class="card">
+  <h2 class="card__title"><%= product.name %></h2>
+  <p class="card_description"><%= product.description %></p>
+  <% if (product.price) { %>
+  <p class="card_price"><%= product.price %></p>
+  <% } %>
+  <div>
+    <a href="/products/<%= product.name %>">Details</a>
+    <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+  </div>
+</div>

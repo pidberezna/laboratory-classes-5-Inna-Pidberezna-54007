@@ -6,14 +6,11 @@
   <body>
     <main>
       <%- include('partials/navigation', { menuLinks: menuLinks, activeLinkPath:
-      activeLinkPath }); %>
+      activeLinkPath, cartCount: cartCount }); %>
       <h1 class="heading">Newest product</h1>
       <% if (newestProduct?.name) { %>
       <br />
-      <div>
-        New product data - Name: <%= newestProduct.name %>, Description: <%=
-        newestProduct.description %>
-      </div>
+      <div><%- include('partials/card', { product: newestProduct }); %></div>
       <% } else { %>
       <br />
       <div>No new products available.</div>

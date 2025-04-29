@@ -1,56 +1,68 @@
-const Product = require("../models/Product");
-const { MENU_LINKS } = require("../constants/navigation");
-const { STATUS_CODE } = require("../constants/statusCode");
+const Product = require('../models/Product');
+const { MENU_LINKS } = require('../constants/navigation');
+const { STATUS_CODE } = require('../constants/statusCode');
 
 exports.getProductsView = (request, response) => {
   const products = Product.getAll();
+  const cartCount = products.length;
 
-  response.render("products.ejs", {
-    headTitle: "Shop - Products",
-    path: "/",
+  response.render('products.ejs', {
+    headTitle: 'Shop - Products',
+    path: '/',
     menuLinks: MENU_LINKS,
-    activeLinkPath: "/products",
+    activeLinkPath: '/products',
     products,
+    cartCount,
   });
 };
 
 exports.getAddProductView = (request, response) => {
-  response.render("add-product.ejs", {
-    headTitle: "Shop - Add product",
-    path: "/add",
+  const products = Product.getAll();
+  const cartCount = products.length;
+
+  response.render('add-product.ejs', {
+    headTitle: 'Shop - Add product',
+    path: '/add',
     menuLinks: MENU_LINKS,
-    activeLinkPath: "/products/add",
+    activeLinkPath: '/products/add',
+    cartCount,
   });
 };
 
 exports.addNewProduct = (request, response) => {
   Product.add(request.body);
 
-  response.status(STATUS_CODE.FOUND).redirect("/products/new");
+  response.status(STATUS_CODE.FOUND).redirect('/products/new');
 };
 
 exports.getNewProductView = (request, response) => {
+  const products = Product.getAll();
+  const cartCount = products.length;
   const newestProduct = Product.getLast();
 
-  response.render("new-product.ejs", {
-    headTitle: "Shop - New product",
-    path: "/new",
-    activeLinkPath: "/products/new",
+  response.render('new-product.ejs', {
+    headTitle: 'Shop - New product',
+    path: '/new',
+    activeLinkPath: '/products/new',
     menuLinks: MENU_LINKS,
     newestProduct,
+    cartCount,
   });
 };
 
 exports.getProductView = (request, response) => {
+  const products = Product.getAll();
+  const cartCount = products.length;
   const name = request.params.name;
   const product = Product.findByName(name);
 
-  response.render("product.ejs", {
-    headTitle: "Shop - Product",
+  response.render('product.ejs', {
+    headTitle: 'Shop - Product',
     path: `/products/${name}`,
     activeLinkPath: `/products/${name}`,
     menuLinks: MENU_LINKS,
     product,
+    cartCount,
   });
 };
 
