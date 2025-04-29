@@ -29,12 +29,6 @@ exports.getAddProductView = (request, response) => {
   });
 };
 
-exports.addNewProduct = (request, response) => {
-  Product.add(request.body);
-
-  response.status(STATUS_CODE.FOUND).redirect('/products/new');
-};
-
 exports.getNewProductView = (request, response) => {
   const products = Product.getAll();
   const cartCount = products.length;

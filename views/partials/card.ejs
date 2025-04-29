@@ -1,8 +1,13 @@
 <div class="card">
+  <img
+    src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/package.svg"
+    alt="<%= product.name %>"
+    class="card__image"
+  />
   <h2 class="card__title"><%= product.name %></h2>
-  <p class="card_description"><%= product.description %></p>
+  <p class="card__description"><%= product.description %></p>
   <% if (product.price) { %>
-  <p class="card_price"><%= product.price %></p>
+  <p class="card__price"><%= product.price %></p>
   <% } %>
   <div>
     <a href="/products/<%= product.name %>">Details</a>
